@@ -34,9 +34,9 @@ public class SerieControlador {
         return this.serieRepository.listarSeries();
     }
     
-   /* public List<SerieModelo> consultar(String titulo, Genero genero, Integer estrellas,
+   public List<SerieModelo> consultar(String titulo, Genero genero, Integer estrellas,
             boolean atp, boolean menorCien, boolean menorQuinientos,
             boolean menorMil, boolean mayorMil){
         return this.serieRepository.consultar(titulo, genero, estrellas, atp, menorCien, menorQuinientos, menorMil, mayorMil);
-    }*/
+    }
 }

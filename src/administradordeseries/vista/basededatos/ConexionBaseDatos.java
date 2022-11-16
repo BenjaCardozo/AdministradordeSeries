@@ -233,7 +233,6 @@ public class ConexionBaseDatos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No ha sido posible conectarse, vuelva a intentar!");
         }
 
-
     }//GEN-LAST:event_jButtonConectarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed

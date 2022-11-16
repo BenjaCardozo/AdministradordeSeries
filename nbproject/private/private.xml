@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Programacion/PragmaSOFT%202022/AdministradoDeSeries/src/META-INF/persistence.xml</file>
+            <file>file:/C:/Programacion/PragmaSOFT%202022/AdministradoDeSeries/src/administradordeseries/vista/basededatos/ConexionBaseDatos.java</file>
+            <file>file:/C:/Programacion/PragmaSOFT%202022/AdministradoDeSeries/src/administradordeseries/modelo/SerieModelo.java</file>
+            <file>file:/C:/Programacion/PragmaSOFT%202022/AdministradoDeSeries/src/administradordeseries/vista/serie/AgregarSerie.java</file>
+            <file>file:/C:/Programacion/PragmaSOFT%202022/AdministradoDeSeries/src/administradordeseries/dao/SerieDAO.java</file>
+            <file>file:/C:/Programacion/PragmaSOFT%202022/AdministradoDeSeries/src/administradordeseries/controlador/SerieControlador.java</file>
             <file>file:/C:/Programacion/PragmaSOFT%202022/AdministradoDeSeries/src/administradordeseries/vista/principal/Principal.java</file>
         </group>
     </open-files>
