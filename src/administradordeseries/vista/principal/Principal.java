@@ -8,7 +8,6 @@ package administradordeseries.vista.principal;
 import administradordeseries.controlador.SerieControlador;
 import administradordeseries.enums.Genero;
 import administradordeseries.modelo.SerieModelo;
-import administradordeseries.modelo.SerieModelo_;
 import administradordeseries.vista.basededatos.ConexionBaseDatos;
 import administradordeseries.vista.serie.AgregarSerie;
 import administradordeseries.vista.serie.ModificarSerie;
@@ -372,32 +371,37 @@ public class Principal extends javax.swing.JFrame {
         int fila = jTSeries.getSelectedRow();
 
         if (fila != -1) {
+            String estado = jTSeries.getValueAt(fila, 8).toString();
+            if (estado.equals("AC")) {
+                String precio = eliminarSignoPeso((jTSeries.getValueAt(fila, 6).toString()));
+                String fecha = jTSeries.getValueAt(fila, 3).toString();
+                serieModelo.setId(Long.parseLong(jTSeries.getValueAt(fila, 0).toString()));
+                serieModelo.setTitulo(jTSeries.getValueAt(fila, 1).toString());
+                serieModelo.setDescripcion(jTSeries.getValueAt(fila, 2).toString());
 
-            String precio = eliminarSignoPeso((jTSeries.getValueAt(fila, 6).toString()));
-            String fecha = jTSeries.getValueAt(fila, 3).toString();
-            serieModelo.setId(Long.parseLong(jTSeries.getValueAt(fila, 0).toString()));
-            serieModelo.setTitulo(jTSeries.getValueAt(fila, 1).toString());
-            serieModelo.setDescripcion(jTSeries.getValueAt(fila, 2).toString());
+                try {
+                    serieModelo.setFechaEstreno(convertirACalendar(fecha));
+                } catch (ParseException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
-            try {
-                serieModelo.setFechaEstreno(convertirACalendar(fecha));
-            } catch (ParseException ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                serieModelo.setEstrellas(Integer.parseInt(jTSeries.getValueAt(fila, 4).toString()));
+                serieModelo.setGenero(Genero.valueOf((jTSeries.getValueAt(fila, 5).toString())));
+                serieModelo.setPrecioAlquiler(Double.parseDouble(precio));
+                serieModelo.setAtp("Si".equals(jTSeries.getValueAt(fila, 7).toString()));
+                serieModelo.setEstado(jTSeries.getValueAt(fila, 8).toString());
+
+                ModificarSerie modificarSerie = new ModificarSerie(this);
+
+                modificarSerie.setVisible(true);
+                modificarSerie.establecerDatosForm(serieModelo);
+                modificarSerie.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se puede modificar una serie anulada");
             }
 
-            serieModelo.setEstrellas(Integer.parseInt(jTSeries.getValueAt(fila, 4).toString()));
-            serieModelo.setGenero(Genero.valueOf((jTSeries.getValueAt(fila, 5).toString())));
-            serieModelo.setPrecioAlquiler(Double.parseDouble(precio));
-            serieModelo.setAtp("SI".equals(jTSeries.getValueAt(fila, 7).toString()));
-            serieModelo.setEstado(jTSeries.getValueAt(fila, 8).toString());
-
-            ModificarSerie modificarSerie = new ModificarSerie(this);
-
-            modificarSerie.setVisible(true);
-            modificarSerie.establecerDatosForm(serieModelo);
-            modificarSerie.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         } else {
-            JOptionPane.showMessageDialog(this, "Por favor seleccione un item de la lista");
+            JOptionPane.showMessageDialog(null, "Seleccione una serie de la lista por favor");
         }
 
 
@@ -425,7 +429,7 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Por favor seleccione un item de la lista");
+            JOptionPane.showMessageDialog(null, "Por favor seleccione un item de la lista");
         }
     }//GEN-LAST:event_jBEliminarActionPerformed
 
@@ -532,25 +536,25 @@ public class Principal extends javax.swing.JFrame {
 
         List<SerieModelo> series = serieControlador.listar();
 
-        series.forEach((serie) -> {
-            Object[] data = new Object[columNames.length];
+            for (SerieModelo serie : series) {
+                Object[] data = new Object[columNames.length];
 
-            Calendar cal = serie.getFechaEstreno();
+                Calendar cal = serie.getFechaEstreno();
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-            data[0] = serie.getId();
-            data[1] = serie.getTitulo();
-            data[2] = serie.getDescripcion();
-            data[3] = sdf.format(cal.getTime());
-            data[4] = serie.getEstrellas();
-            data[5] = serie.getGenero();
-            data[6] = "$" + serie.getPrecioAlquiler();
-            data[7] = serie.isAtp() == true ? "SI" : "NO";
-            data[8] = serie.getEstado();
+                data[0] = serie.getId();
+                data[1] = serie.getTitulo();
+                data[2] = serie.getDescripcion();
+                data[3] = sdf.format(cal.getTime());
+                data[4] = serie.getEstrellas();
+                data[5] = serie.getGenero();
+                data[6] = "$" + serie.getPrecioAlquiler();
+                data[7] = serie.isAtp() == true ? "SI" : "NO";
+                data[8] = serie.getEstado();
 
-            model.addRow(data);
-        });
+                model.addRow(data);
+        }
 
         jTSeries.setModel(model);
     }

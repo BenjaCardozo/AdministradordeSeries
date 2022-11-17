@@ -228,7 +228,7 @@ public class ConexionBaseDatos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Conexión exitosa!");
             Principal principal = new Principal(this);
             principal.setVisible(true);
-            setVisible(false);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "No ha sido posible conectarse, vuelva a intentar!");
         }

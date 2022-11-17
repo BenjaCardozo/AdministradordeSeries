@@ -5,8 +5,12 @@
         <group>
             <file>file:/C:/Programacion/PragmaSOFT%202022/AdministradoDeSeries/src/administradordeseries/vista/basededatos/ConexionBaseDatos.java</file>
             <file>file:/C:/Programacion/PragmaSOFT%202022/AdministradoDeSeries/src/administradordeseries/modelo/SerieModelo.java</file>
+            <file>file:/C:/Programacion/PragmaSOFT%202022/AdministradoDeSeries/src/administradordeseries/database/ConexionDataBase.java</file>
             <file>file:/C:/Programacion/PragmaSOFT%202022/AdministradoDeSeries/src/administradordeseries/vista/serie/AgregarSerie.java</file>
+            <file>file:/C:/Programacion/PragmaSOFT%202022/AdministradoDeSeries/src/administradordeseries/servicio/SerieServicio.java</file>
+            <file>file:/C:/Programacion/PragmaSOFT%202022/AdministradoDeSeries/src/administradordeseries/enums/Genero.java</file>
             <file>file:/C:/Programacion/PragmaSOFT%202022/AdministradoDeSeries/src/administradordeseries/dao/SerieDAO.java</file>
+            <file>file:/C:/Programacion/PragmaSOFT%202022/AdministradoDeSeries/src/administradordeseries/vista/serie/ModificarSerie.java</file>
             <file>file:/C:/Programacion/PragmaSOFT%202022/AdministradoDeSeries/src/administradordeseries/controlador/SerieControlador.java</file>
             <file>file:/C:/Programacion/PragmaSOFT%202022/AdministradoDeSeries/src/administradordeseries/vista/principal/Principal.java</file>
         </group>

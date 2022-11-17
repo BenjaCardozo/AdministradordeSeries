@@ -301,29 +301,32 @@ public class AgregarSerie extends javax.swing.JFrame {
 
         if (validarCampos()) {
 
-            serieModelo.setTitulo(jTextTitulo.getText());
-            serieModelo.setDescripcion(jTextDescripcion.getText());
-            serieModelo.setEstrellas(Integer.parseInt(jTextEstrellas.getSelectedItem().toString()));
-            serieModelo.setAtp(checkboxATP.getState());
-            serieModelo.setFechaEstreno(jDateFechaEstreno.getCalendar());
-            serieModelo.setPrecioAlquiler(Double.parseDouble(jTextPrecioAlquiler.getText()));
-            serieModelo.setEstado("AC");
-            serieModelo.setGenero(Genero.valueOf(jComboGenero.getSelectedItem().toString()));
-
-            SerieControlador serieControlador = new SerieControlador();
-
             try {
+                serieModelo.setTitulo(jTextTitulo.getText());
+                serieModelo.setDescripcion(jTextDescripcion.getText());
+                serieModelo.setEstrellas(Integer.parseInt(jTextEstrellas.getSelectedItem().toString()));
+                serieModelo.setAtp(checkboxATP.getState());
+                serieModelo.setFechaEstreno(jDateFechaEstreno.getCalendar());
+                serieModelo.setPrecioAlquiler(Double.parseDouble(jTextPrecioAlquiler.getText()));
+                serieModelo.setEstado("AC");
+                serieModelo.setGenero(Genero.valueOf(jComboGenero.getSelectedItem().toString()));
+
+                SerieControlador serieControlador = new SerieControlador();
                 boolean respuesta = serieControlador.registrar(serieModelo);
-                JOptionPane.showMessageDialog(this, "Serie registrada con exito!");
-                limpiarCampos();
-                this.principal.cargarSeries();
+                if (respuesta) {
+                    JOptionPane.showMessageDialog(null, "Serie registrada con exito!");
+                    limpiarCampos();
+                    this.principal.cargarSeries();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al registrar serie!");
+                }
+
             } catch (Exception ex) {
                 Logger.getLogger(AgregarSerie.class.getName()).log(Level.SEVERE, null, ex);
 
                 JOptionPane.showMessageDialog(this, "Error al registrar serie");
             }
         }
-
 
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 

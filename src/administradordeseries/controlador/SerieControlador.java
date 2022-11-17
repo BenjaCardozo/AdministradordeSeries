@@ -1,42 +1,42 @@
 package administradordeseries.controlador;
 
 import administradordeseries.modelo.SerieModelo;
-import administradordeseries.dao.SerieDAO;
 import administradordeseries.enums.Genero;
+import administradordeseries.servicio.SerieServicio;
 import java.util.List;
 
 public class SerieControlador {
     
-    private SerieDAO serieRepository;
+    private SerieServicio serieServicio;
     
     public SerieControlador() {
         
-        this.serieRepository = new SerieDAO();
+        this.serieServicio = new SerieServicio();
     }
     
     public boolean registrar(SerieModelo serieModelo) throws Exception {
-        return this.serieRepository.registrar(serieModelo);
+        return this.serieServicio.registrarSerie(serieModelo);
     }
     
-    public void modificar(SerieModelo serieModelo) throws Exception {
-        this.serieRepository.modificar(serieModelo);
+    public boolean modificar(SerieModelo serieModelo) throws Exception {
+        return this.serieServicio.modificar(serieModelo);
     }
     
     public boolean eliminar(Long id) throws Exception {
-        return this.serieRepository.eliminarSerie(id);
+        return this.serieServicio.eliminarSerie(id);
     }
     
     public boolean anular(Long id) throws Exception {
-        return this.serieRepository.anularSerie(id);
+        return this.serieServicio.anularSerie(id);
     }
 
     public List<SerieModelo> listar() {
-        return this.serieRepository.listarSeries();
+        return this.serieServicio.listarSeries();
     }
     
    public List<SerieModelo> consultar(String titulo, Genero genero, Integer estrellas,
             boolean atp, boolean menorCien, boolean menorQuinientos,
             boolean menorMil, boolean mayorMil){
-        return this.serieRepository.consultar(titulo, genero, estrellas, atp, menorCien, menorQuinientos, menorMil, mayorMil);
+        return this.serieServicio.consultar(titulo, genero, estrellas, atp, menorCien, menorQuinientos, menorMil, mayorMil);
     }
 }

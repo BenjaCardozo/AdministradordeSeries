@@ -12,7 +12,7 @@ public class ModificarSerie extends javax.swing.JFrame {
 
     private Principal principal;
     
-    SerieModelo serieModelo;
+    SerieModelo serieModeloData = null;
 
     public ModificarSerie(Principal principal) {
         initComponents();
@@ -296,30 +296,33 @@ public class ModificarSerie extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextPrecioAlquilerActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-        SerieModelo serieModelom = new SerieModelo();
 
         if (validarCampos()) {
 
-            serieModelo.setTitulo(jTextTitulo.getText());
-            serieModelo.setDescripcion(jTextDescripcion.getText());
-            serieModelo.setEstrellas(Integer.parseInt(jTextEstrellas.getSelectedItem().toString()));
-            serieModelo.setAtp(checkboxATP.getState());
-            serieModelo.setFechaEstreno(jDateFechaEstreno.getCalendar());
-            serieModelo.setPrecioAlquiler(Double.parseDouble(jTextPrecioAlquiler.getText()));
-            serieModelo.setEstado("AC");
-            serieModelo.setGenero(Genero.valueOf(jComboGenero.getSelectedItem().toString()));
-
-            SerieControlador serieControlador = new SerieControlador();
+            serieModeloData.setTitulo(jTextTitulo.getText());
+            serieModeloData.setDescripcion(jTextDescripcion.getText());
+            serieModeloData.setEstrellas(Integer.parseInt(jTextEstrellas.getSelectedItem().toString()));
+            serieModeloData.setAtp(checkboxATP.getState());
+            serieModeloData.setFechaEstreno(jDateFechaEstreno.getCalendar());
+            serieModeloData.setPrecioAlquiler(Double.parseDouble(jTextPrecioAlquiler.getText()));
+            serieModeloData.setGenero(Genero.valueOf(jComboGenero.getSelectedItem().toString()));
 
             try {
-                serieControlador.modificar(serieModelo);
-                JOptionPane.showMessageDialog(this, "Serie modificada con exito!");
-                limpiarCampos();
-                this.principal.cargarSeries();
+                SerieControlador serieControlador = new SerieControlador();
+                boolean respuesta = serieControlador.modificar(serieModeloData);
+                if (respuesta) {
+                    JOptionPane.showMessageDialog(null, "Serie registrada con exito!");
+                    limpiarCampos();
+                    this.principal.cargarSeries();
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al registrar serie!");
+                }
+               
             } catch (Exception ex) {
                 Logger.getLogger(ModificarSerie.class.getName()).log(Level.SEVERE, null, ex);
 
-                JOptionPane.showMessageDialog(this, "Error al modificar serie");
+                JOptionPane.showMessageDialog(null, "Error al modificar serie");
             }
         }
 
@@ -339,6 +342,7 @@ public class ModificarSerie extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_jTextPrecioAlquilerKeyTyped
+
 
     private void limpiarCampos() {
         jTextDescripcion.setText("");
@@ -371,15 +375,15 @@ public class ModificarSerie extends javax.swing.JFrame {
     }
     
     public void establecerDatosForm (SerieModelo serieModelo){
-        this.serieModelo = serieModelo;
+        this.serieModeloData = serieModelo;
         
-        jTextTitulo.setText(serieModelo.getTitulo());
-        jTextDescripcion.setText(serieModelo.getDescripcion());
-        jTextEstrellas.setSelectedItem(""+(serieModelo.getEstrellas()));
-        jTextPrecioAlquiler.setText(""+serieModelo.getPrecioAlquiler());
-        jDateFechaEstreno.setCalendar(serieModelo.getFechaEstreno());
-        jComboGenero.setSelectedItem(serieModelo.getGenero());
-        checkboxATP.setState(serieModelo.isAtp());
+        jTextTitulo.setText(serieModeloData.getTitulo());
+        jTextDescripcion.setText(serieModeloData.getDescripcion());
+        jTextEstrellas.setSelectedItem(""+(serieModeloData.getEstrellas()));
+        jTextPrecioAlquiler.setText(""+serieModeloData.getPrecioAlquiler());
+        jDateFechaEstreno.setCalendar(serieModeloData.getFechaEstreno());
+        jComboGenero.setSelectedItem(serieModeloData.getGenero());
+        checkboxATP.setState(serieModeloData.isAtp());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
